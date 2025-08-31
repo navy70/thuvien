@@ -1,0 +1,201 @@
+/* Toàn trang */
+body {
+  font-family: Arial, sans-serif;
+  background: url("background/background") no-repeat center center fixed;
+  background-size: cover;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  min-height: 100vh;
+}
+
+/* Form đăng nhập / đăng ký */
+.login-container,
+.register-container {
+  margin: 100px auto;
+  width: 320px;
+  padding: 25px;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+input,
+select {
+  display: block;
+  width: 90%;
+  margin: 10px auto;
+  padding: 10px;
+  border: 1px solid #aaa;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+input:focus,
+select:focus {
+  border-color: #3498db;
+  outline: none;
+  box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+}
+
+/* Nút */
+button {
+  padding: 8px 15px;
+  margin: 5px;
+  border: none;
+  border-radius: 6px;
+  background: #3498db;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+button:hover {
+  background: #2980b9;
+}
+
+/* Menu */
+nav {
+  background: linear-gradient(90deg, #2c3e50, #34495e);
+  color: white;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+nav #welcomeUser {
+  margin-right: auto;
+  font-weight: bold;
+}
+nav button {
+  background: #444;
+}
+nav button:hover {
+  background: #3498db;
+}
+
+/* Bảng sách */
+table {
+  width: 90%;
+  margin: 20px auto;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+}
+table,
+th,
+td {
+  border: 1px solid #ddd;
+}
+th {
+  background: #f2f2f2;
+  font-weight: bold;
+}
+th,
+td {
+  padding: 10px;
+  text-align: center;
+}
+tbody tr:nth-child(even) {
+  background: #f9f9f9;
+}
+tbody tr:hover {
+  background: #f1f7ff;
+}
+
+/* Form thêm sách */
+.form {
+  margin: 15px auto;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: #fff;
+  max-width: 400px;
+  text-align: left;
+}
+.form h3 {
+  text-align: center;
+  margin-bottom: 15px;
+  color: purple;
+}
+.form label {
+  font-size: 14px;
+  font-weight: bold;
+  display: block;
+  margin-top: 8px;
+}
+.form input[type="checkbox"] {
+  width: auto;
+  margin-right: 5px;
+}
+
+/* Import/Export */
+.import-box {
+  margin: 15px 0;
+}
+#borrowTable {
+  width: 90%;
+  margin: 20px auto;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+#borrowTable th,
+#borrowTable td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: center;
+}
+
+#borrowTable th {
+  background: #f2f2f2;
+  font-weight: bold;
+}
+.bestseller {
+  margin: 20px auto;
+  max-width: 900px;
+}
+
+.bestseller h3 {
+  margin-bottom: 15px;
+  color: #e67e22;
+}
+
+.book-list {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.book-card {
+  background: #fff;
+  border-radius: 10px;
+  padding: 10px;
+  width: 160px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+}
+
+.book-card:hover {
+  transform: scale(1.05);
+}
+
+.book-card img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.book-card p {
+  font-weight: bold;
+  margin: 8px 0 2px;
+}
+
+.book-card .author {
+  font-size: 13px;
+  color: #666;
+}

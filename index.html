@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Quản lý Thư viện</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Đăng nhập -->
+    <div class="login-container" id="loginPage">
+      <h2>Đăng nhập</h2>
+      <input type="text" id="loginUser" placeholder="Tên đăng nhập" />
+      <input type="password" id="loginPass" placeholder="Mật khẩu" />
+      <button onclick="login()">Đăng nhập</button>
+      <p>Chưa có tài khoản? <a href="#" onclick="showRegister()">Đăng ký</a></p>
+    </div>
+
+    <!-- Đăng ký -->
+    <div class="register-container" id="registerPage" style="display: none">
+      <h2>Đăng ký</h2>
+      <input type="text" id="regUser" placeholder="Tên đăng nhập" />
+      <input type="password" id="regPass" placeholder="Mật khẩu" />
+      <input type="email" id="regEmail" placeholder="Email" />
+      <input type="text" id="regPhone" placeholder="Số điện thoại" />
+      <button onclick="register()">Đăng ký</button>
+      <p>Đã có tài khoản? <a href="#" onclick="showLogin()">Đăng nhập</a></p>
+    </div>
+
+    <!-- Trang thư viện -->
+    <div id="libraryPage" style="display: none">
+      <!-- Menu -->
+      <nav>
+        <span id="welcomeUser"></span>
+        <button onclick="showPage('homePage')">🏠 Trang chủ</button>
+        <button onclick="showPage('searchPage')">🔍 Tìm sách</button>
+        <button onclick="showPage('borrowReturnPage')">
+          📚 Mượn / Trả sách
+        </button>
+        <button onclick="showPage('buyPage')">💰 Mua sách</button>
+        <button onclick="logout()" style="margin-left: auto">Đăng xuất</button>
+      </nav>
+
+      <!-- Trang chủ -->
+      <div id="homePage" class="page" style="display: block">
+        <h1>📚 Quản lý Thư viện</h1>
+        <p>Chào mừng bạn đến với hệ thống quản lý thư viện.</p>
+
+        <!-- Giờ mở cửa -->
+        <div class="library-info">
+          <h3>🕒 Giờ hoạt động</h3>
+          <p>Mở cửa: 8:00 sáng</p>
+          <p>Đóng cửa: 9:00 tối</p>
+        </div>
+
+        <!-- Hình ảnh thư viện -->
+        <div class="library-image">
+          <img src="background/library.jpg" alt="Thư viện" width="400" />
+        </div>
+
+        <!-- Sách bán chạy -->
+        <div class="bestseller">
+          <h3>🔥 Sách bán chạy</h3>
+          <div class="book-list">
+            <div class="book-card">
+              <img
+                src="background/dế mèn phiêu lưu.jpg"
+                alt="Dế Mèn Phiêu Lưu Ký"
+              />
+              <p>Dế Mèn Phiêu Lưu Ký</p>
+              <span class="author">Tô Hoài</span>
+            </div>
+            <div class="book-card">
+              <img src="background/nhà giả kim.jpg" alt="Nhà Giả Kim" />
+              <p>Nhà Giả Kim</p>
+              <span class="author">Paulo Coelho</span>
+            </div>
+            <div class="book-card">
+              <img
+                src="background/harry potter.jpg"
+                alt="Harry Potter và Hòn đá Phù thủy"
+              />
+              <p>Harry Potter và Hòn đá Phù thủy</p>
+              <span class="author">J.K. Rowling</span>
+            </div>
+            <div class="book-card">
+              <img src="background/DacNhanTam.jpg" alt="Đắc Nhân Tâm" />
+              <p>Đắc Nhân Tâm</p>
+              <span class="author">Dale Carnegie</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tìm sách -->
+      <div id="searchPage" class="page" style="display: none">
+        <h2>🔍 Tìm sách</h2>
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Nhập tên hoặc tác giả..."
+          onkeyup="searchBooks()"
+        />
+        <button onclick="toggleForm()" id="toggleBtn">➕ Thêm sách</button>
+
+        <!-- Form thêm sách -->
+        <div class="form" id="formBox" style="display: none">
+          <h3>➕ Thêm Sách</h3>
+
+          <label>Tiêu đề:</label>
+          <input type="text" id="bookTitle" placeholder="Tên sách" />
+
+          <label>Tác giả:</label>
+          <input type="text" id="bookAuthor" placeholder="Tên tác giả" />
+
+          <label>Năm XB:</label>
+          <input type="number" id="bookYear" placeholder="VD: 2024" />
+
+          <label>Số lượng:</label>
+          <input type="number" id="bookNumber" value="1" min="1" />
+
+          <label
+            ><input type="checkbox" id="bookActive" checked /> Active</label
+          >
+
+          <label>Ảnh bìa:</label>
+          <input type="file" id="bookImage" accept="image/*" />
+
+          <label>Danh mục:</label>
+          <select id="bookCategory">
+            <option value="Văn học">Văn học</option>
+            <option value="Khoa học">Khoa học</option>
+            <option value="Lịch sử">Lịch sử</option>
+            <option value="Khác">Khác</option>
+          </select>
+
+          <div style="text-align: center; margin-top: 10px">
+            <button onclick="saveBook()">Lưu</button>
+            <button type="reset" onclick="resetForm()">Reset</button>
+          </div>
+        </div>
+
+        <!-- Import/Export JSON -->
+        <div class="import-box">
+          <input
+            type="file"
+            id="fileInput"
+            accept=".json"
+            onchange="importData(event)"
+          />
+          <button type="button" onclick="exportData()">Xuất JSON</button>
+        </div>
+
+        <!-- Bảng sách -->
+        <table id="bookTable">
+          <thead>
+            <tr>
+              <th>Ảnh bìa</th>
+              <th>Tên sách</th>
+              <th>Tác giả</th>
+              <th>Năm XB</th>
+              <th>Danh mục</th>
+              <th>Số lượng</th>
+              <th>Trạng thái</th>
+              <th>Hành động</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+
+      <!-- Mượn / Trả sách -->
+      <div id="borrowReturnPage" class="page" style="display: none">
+        <h2>📚 Mượn / Trả sách</h2>
+
+        <!-- Form nhập thông tin mượn -->
+        <form id="borrowForm">
+          <input type="text" id="borrowName" placeholder="Họ tên" required />
+          <input
+            type="tel"
+            id="borrowPhone"
+            placeholder="Số điện thoại"
+            required
+          />
+          <input type="email" id="borrowEmail" placeholder="Email" required />
+          <input type="date" id="borrowDate" required />
+          <input
+            type="text"
+            id="borrowTitle"
+            placeholder="Tên sách muốn mượn"
+            required
+          />
+          <button type="button" onclick="borrowBook()">Mượn</button>
+        </form>
+
+        <!-- Bảng danh sách mượn -->
+        <h3>📖 Danh sách sách đã mượn</h3>
+        <table id="borrowTable">
+          <thead>
+            <tr>
+              <th>Họ tên</th>
+              <th>Số ĐT</th>
+              <th>Email</th>
+              <th>Ngày mượn</th>
+              <th>Sách</th>
+              <th>Hành động</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+
+      <!-- Mua sách -->
+      <div id="buyPage" class="page" style="display: none">
+        <h2>💰 Mua sách</h2>
+
+        <!-- Form nhập thông tin mua -->
+        <form id="buyForm">
+          <input type="text" id="buyName" placeholder="Họ tên" required />
+          <input
+            type="tel"
+            id="buyPhone"
+            placeholder="Số điện thoại"
+            required
+          />
+          <input type="email" id="buyEmail" placeholder="Email" required />
+          <input type="text" id="buyAddress" placeholder="Địa chỉ" required />
+          <input
+            type="text"
+            id="buyTitle"
+            placeholder="Tên sách muốn mua"
+            required
+          />
+          <input
+            type="number"
+            id="buyPrice"
+            placeholder="Giá tiền (VND)"
+            required
+          />
+          <button type="button" onclick="buyBook()">Mua</button>
+        </form>
+
+        <!-- Bảng danh sách mua -->
+        <h3>🛒 Danh sách mua sách</h3>
+        <table id="buyTable">
+          <thead>
+            <tr>
+              <th>Họ tên</th>
+              <th>Số ĐT</th>
+              <th>Email</th>
+              <th>Địa chỉ</th>
+              <th>Sách</th>
+              <th>Giá tiền</th>
+              <th>Hành động</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
